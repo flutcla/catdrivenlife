@@ -1,18 +1,30 @@
 ---
-import BaseHead from "../../../components/BaseHead.astro";
-import Header from "../../../components/Header.astro";
-import Footer from "../../../components/Footer.astro";
+import { getCollection } from "astro:content";
+import CommonLayout from "../../../layouts/CommonLayout.astro";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../../consts";
+const blogEntries = await getCollection("blog");
+const sortedBlogEntries = blogEntries.sort((a, b) => {
+  return a.slug > b.slug ? -1 : 1;
+});
+const filteredBlogEntries = sortedBlogEntries.filter((blogPostEntry) => {
+  return !blogPostEntry.data.tags.includes("ねこ");
+});
 ---
 
-<html lang="ja">
-  <head>
-    <BaseHead title={SITE_TITLE} , description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <h1>OtherBlog</h1>
-    <Footer />
-  </body>
-</html>
+<CommonLayout>
+  <h1>OtherBlog</h1>
+  <ul>
+    {
+      filteredBlogEntries.map((blogPostEntry) => (
+        <li>
+          <a href={`/blog/${blogPostEntry.slug}`}>
+            <p>
+              {blogPostEntry.data.date.toLocaleDateString()} -
+              {blogPostEntry.data.title}
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</CommonLayout>

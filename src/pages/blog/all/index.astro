@@ -6,16 +6,13 @@ const blogEntries = await getCollection("blog");
 const sortedBlogEntries = blogEntries.sort((a, b) => {
   return a.slug > b.slug ? -1 : 1;
 });
-const filteredBlogEntries = sortedBlogEntries.filter((blogPostEntry) => {
-  return blogPostEntry.data.tags.includes("ねこ");
-});
 ---
 
 <CommonLayout>
-  <h1>CatBlog</h1>
+  <h1>Blog</h1>
   <ul>
     {
-      filteredBlogEntries.map((blogPostEntry) => (
+      sortedBlogEntries.map((blogPostEntry) => (
         <li>
           <a href={`/blog/${blogPostEntry.slug}`}>
             <p>
