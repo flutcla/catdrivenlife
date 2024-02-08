@@ -27,3 +27,15 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+@media (min-width: 721px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
