@@ -1,6 +1,11 @@
 import { defineConfig } from 'astro/config';
+import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://catdrivenlife.pages.dev'
+  site: 'https://catdrivenlife.pages.dev',
+  integrations: [mdx()],
+  redirects: {
+    '/blog': '/blog/all'
+  },
 });
