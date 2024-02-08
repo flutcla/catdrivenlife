@@ -22,7 +22,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   </head>
   <body>
     <Header />
-    <slot />
+    <div class="inner"><slot /></div>
     <Footer />
+    <style>
+      .inner {
+        max-width: 800px;
+        margin: 16px;
+      }
+    </style>
   </body>
 </html>
