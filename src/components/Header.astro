@@ -9,9 +9,12 @@ import { SITE_TITLE } from "../consts";
     <h2><a href="/">{SITE_TITLE}</a></h2>
     <div class="internal-links">
       <HeaderLink href="/">ホーム</HeaderLink>
-      <HeaderLink href="/blog/all">ブログ(全て)</HeaderLink>
-      <HeaderLink href="/blog/cat">ブログ(ねこ)</HeaderLink>
-      <HeaderLink href="/blog/other">ブログ(ねこ以外)</HeaderLink>
+      <HeaderLink href="/blog/all" class="hide-mobile">ブログ(全て)</HeaderLink>
+      <HeaderLink href="/blog/cat" class="hide-mobile">ブログ(ねこ)</HeaderLink>
+      <HeaderLink href="/blog/other" class="hide-mobile">
+        ブログ(ねこ以外)
+      </HeaderLink>
+      <HeaderLink href="/blog/all" class="hide-desktop">ブログ</HeaderLink>
     </div>
     <div class="social-links">
       <a href="https://twitter.com/catdrivenlife" target="_blank">
@@ -61,10 +64,5 @@ import { SITE_TITLE } from "../consts";
   .social-links,
   .social-links a {
     display: flex;
-  }
-  @media (max-width: 720px) {
-    .social-links {
-      display: none;
-    }
   }
 </style>
