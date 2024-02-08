@@ -1,0 +1,20 @@
+name: preview link
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: ブランチ名を取得してプレビューリンクをコメントする
+        run: |
+          # ブランチ名を取得
+          branch_name=$(echo $GITHUB_REF | sed -e 's/refs\/heads\///')
+          # スラッシュをハイフンに置換
+          branch_name=$(echo $branch_name | sed -e 's/\//-/g')
+          # プレビューリンクをコメント リンクは {ブランチ名}.catdrivenlife.pages.dev の形式
+          gh pr comment ${{ github.event.pull_request.number }} -b "Preview link: https://$branch_name.catdrivenlife.pages.dev"
