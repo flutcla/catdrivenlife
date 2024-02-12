@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Spinner from "../components/Spinner.astro";
 
 interface Props {
   title?: string;
@@ -24,6 +25,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     />
   </head>
   <body>
+    <Spinner />
     <Header />
     <div class="inner"><slot /></div>
     <Footer />
@@ -32,6 +34,5 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         max-width: 800px;
         margin: 16px;
       }
-    </style>
   </body>
 </html>
