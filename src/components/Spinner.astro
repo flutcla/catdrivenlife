@@ -3,9 +3,7 @@ import { FADE_DURATION } from "../consts";
 const duration = FADE_DURATION + "ms";
 ---
 
-<div id="loading-spinner" class="loading-spinner">
-  Loading...
-</div>
+<div id="loading-spinner" class="loading-spinner">Loading...</div>
 
 <style define:vars={{ duration }}>
   .loading-spinner {
@@ -27,19 +25,26 @@ const duration = FADE_DURATION + "ms";
   .loading-spinner.hidden {
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--duration) ease-out, visibility 0s linear var(--duration);
+    transition:
+      opacity var(--duration) ease-out,
+      visibility 0s linear var(--duration);
+    pointer-events: none;
+  }
 </style>
 
 <script define:vars={{ FADE_DURATION }}>
-  window.onload = () =>  // ロード完了時
-    document.fonts.ready.then(() => {  // フォントの読み込みを待つ
+  // ロード完了時
+  window.onload = () =>
+    // フォントの読み込みを待つ
+    document.fonts.ready.then(() => {
+      // テスト用に遅延が可能に
       setTimeout(() => {
         const spinner = document.getElementById("loading-spinner");
         spinner?.classList.add("hidden");
 
         setTimeout(() => {
-          // spinner?.remove();
+          spinner?.remove();
         }, FADE_DURATION);
-      }, 0); // テスト用に遅延が可能に
+      }, 0);
     });
 </script>
