@@ -1,0 +1,50 @@
+---
+import { FADE_DURATION } from "../consts";
+const duration = FADE_DURATION + "ms";
+---
+
+<div id="loading-spinner" class="loading-spinner">Loading...</div>
+
+<style define:vars={{ duration }}>
+  .loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    opacity: 1;
+    transition: opacity var(--duration) ease-out;
+  }
+
+  .loading-spinner.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--duration) ease-out,
+      visibility 0s linear var(--duration);
+    pointer-events: none;
+  }
+</style>
+
+<script define:vars={{ FADE_DURATION }}>
+  // ロード完了時
+  window.onload = () =>
+    // フォントの読み込みを待つ
+    document.fonts.ready.then(() => {
+      // テスト用に遅延が可能に
+      setTimeout(() => {
+        const spinner = document.getElementById("loading-spinner");
+        spinner?.classList.add("hidden");
+
+        setTimeout(() => {
+          spinner?.remove();
+        }, FADE_DURATION);
+      }, 0);
+    });
+</script>
